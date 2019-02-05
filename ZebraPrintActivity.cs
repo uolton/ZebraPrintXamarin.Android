@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
@@ -7,9 +7,6 @@ using Android.Views;
 using Android.Widget;
 using LinkOS.Plugin;
 using LinkOS.Plugin.Abstractions;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -39,7 +36,6 @@ namespace HawkEye
                 SetContentView(Resource.Layout.Main);
                 FindViewById<Button>(Resource.Id.BtnConnect).Click += Connect;
                 FindViewById<Button>(Resource.Id.Print).Click += Print;
-                AppCenter.Start("6272f94a-b778-4dae-90dc-abcf3ed51c99", typeof(Analytics), typeof(Crashes));
                 listView = FindViewById<ListView>(Resource.Id.listView);
                 listView.ItemClick += ListView_ItemClick;
                 _LayoutMask = FindViewById<LinearLayout>(Resource.Id.layoutMask);
@@ -49,8 +45,6 @@ namespace HawkEye
             }
             catch (System.Exception ex)
             {
-                Analytics.TrackEvent(ex.Message);
-                Crashes.TrackError(ex);
             }
         }
 
@@ -106,8 +100,6 @@ namespace HawkEye
             catch (System.Exception ex)
             {
                 // Connection Exceptions and issues are caught here
-                Analytics.TrackEvent(ex.Message);
-                Crashes.TrackError(ex);
             }
             finally
             {
